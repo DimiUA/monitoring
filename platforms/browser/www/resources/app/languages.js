@@ -13,7 +13,8 @@ window.LanguagePackages= {
 		"COM_MSG07": "Nothing found",
 
 		"PROMPT_MSG00": "You can leave Notes for this Alarm below",
-		"PROMPT_MSG01": "There is no Alarms",			
+		"PROMPT_MSG01": "There is no Alarms",
+		"PROMPT_MSG02": "Are you sure you want to close the application?",			
 
 		"HOME_MSG00": "Home",
 		"HOME_MSG01": "Status",
