@@ -132,10 +132,45 @@ var mainView = app.views.create('.view-main', {
     }
 });
 
+document.addEventListener("deviceready", onDeviceReady, false ); 
+
+function onDeviceReady(){ 
+    //AppDetails.appId = BuildInfo.packageName;
+
+    //fix app images and text size
+    if (window.MobileAccessibility) {
+        window.MobileAccessibility.usePreferredTextZoom(false);    
+    }
+    if (StatusBar) {
+        StatusBar.styleDefault();
+    } 
+    
+
+    document.addEventListener("backbutton", backFix, false); 
+    //alert(JSON.stringify(window.device));
+}
+
+
+function backFix(event){     
+    if (app.views.main.router.currentRoute.url == "/" ){ 
+        app.dialog.confirm(LANGUAGE.PROMPT_MSG02, function () {        
+            navigator.app.exitApp();
+        });
+    }else{
+        mainView.router.back();
+    } 
+}
+
+function hideKeyboard() {
+    document.activeElement.blur();
+    $$("input").blur();
+}
+
 $$('body').on('submit', '.login-form', function (e) {    
     e.preventDefault();     
     //preLogin(); 
     app.methods.login();
+    hideKeyboard();
     return false;
 });
 
