@@ -1,0 +1,283 @@
+<template>
+<!-- Page, data-name contains page name which can be used in callbacks -->
+        <div class="page " data-name="home" > <!-- page-with-subnavbar -->
+        <!-- Top Navbar -->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="left">
+                        <a href="/panel-left/" class="link icon-only panel-open" data-panel="left">
+                            <i class="icon f7-icons ios-only">menu</i>
+                            <i class="icon material-icons md-only">menu</i>
+                          </a>
+                    </div>
+                    <div class="title sliding">{{@global.LANGUAGE.HOME_MSG00}}</div>
+                    <div class="right">
+                        <a class="link icon-only searchbar-enable" data-searchbar=".searchbar">
+                          <i class="icon f7-icons ios-only">search_strong</i>
+                          <i class="icon material-icons md-only">search</i>
+                        </a>
+                    </div>
+
+                    <form data-search-container=".list-alarm" data-search-item="li" data-search-in=".item-title" class="searchbar searchbar-init searchbar-expandable">
+                        <div class="searchbar-inner">
+                            <div class="searchbar-input-wrap">
+                                <input type="search" placeholder="{{@global.LANGUAGE.COM_MSG02}}"/>
+                                    <i class="searchbar-icon"></i>
+                                <span class="input-clear-button"></span>
+                            </div>
+                            <span class="searchbar-disable-button">{{@global.LANGUAGE.COM_MSG01}}</span>
+                        </div>
+                    </form>
+
+                   
+                </div>
+            </div>
+          
+        
+            <!-- Scrollable page content-->
+            <div class="page-content ptr-content">  
+                <div class="ptr-preloader">
+                    <div class="preloader"></div>
+                    <div class="ptr-arrow"></div>
+                </div>
+                
+                <div class="block  searchbar-not-found">
+                    {{@global.LANGUAGE.COM_MSG07}}
+                </div>
+                <div class="list virtual-list searchbar-found no-hairlines no-margin-top list-alarm">
+                    
+                </div>             
+                
+
+            </div>
+        </div>
+    </template>
+
+
+<script>
+  // script must return component object
+    return {
+        data: function () {
+            var self = this;
+            var ret = {};            
+            //app.methods.storageSetupTime();           
+
+            return ret;
+        },
+        methods: {
+            loadPageClientInfo: function(e){
+                
+                mainView.router.navigate({
+                        name: 'client-info',
+                       
+                    });
+            },
+            loadPageAlarmInfo: function(e){
+                 
+                
+                    mainView.router.navigate({
+                        name: 'alarm-info',
+                        params: { AlarmType: 'Tilt/Shock'},
+                    });
+                
+               
+            },
+            openAlarmMenu: function(e){
+                var self = this;
+
+               
+               
+               /* var Status = `<label class="toggle">
+                                   <span> ${ LANGUAGE.HOME_MSG01 } </span>
+                                  <input type="checkbox">
+                                  <span class="toggle-icon"></span>
+                            </label>`;*/
+                var buttons = [
+                    [
+                        {
+                            text: 'BMW X6 FG4567',
+                            label: true,
+                            color: 'dealer',
+                        },
+                    ],
+                    [
+                       /* {
+                            text: Status,
+                            icon: '<i class="f7-icons icon-notification text-color-gray"></i>',
+                            onClick: function () {
+                                //loadPageSettings();
+                            },  
+                        },    */  
+                        
+                        {
+                            text: LANGUAGE.HOME_MSG02,
+                            icon: '<i class="f7-icons icon-call text-color-gray"></i>',
+                            onClick: function () {
+                                var parent = $$(e.target).closest('[data-customer-phone]');
+                                if (parent && parent.length) {
+                                    self.$app.methods.callTo(parent.data('customer-phone'));
+                                }
+                            },          
+                        },
+                        {
+                            text: LANGUAGE.HOME_MSG03, 
+                            icon: '<i class="f7-icons icon-message text-color-gray"></i>', 
+                            onClick: function () {
+                                
+                            },          
+                        },
+                        {
+                            text: LANGUAGE.HOME_MSG04,  
+                            icon: '<i class="f7-icons icon-info text-color-gray"></i>',
+                            onClick: function () {
+                                self.loadPageClientInfo();
+                            },          
+                        },
+                    ],
+                        
+                ];
+   
+                app.actions.create({
+                    buttons: buttons
+                }).open();
+
+            }
+        },
+       
+        on: {
+            pageInit: function (e, page) { 
+                var self = this;   
+
+                var virtualListEl = page.$el.find('.list-alarm');
+                var items = [];
+
+                var virtualList = app.virtualList.create({
+                      // List Element
+                    el: virtualListEl,
+                      // Pass array with items
+                    items: items,
+                      // Custom search function for searchbar
+                    searchAll: function (query, items) {
+                        var found = [];
+                        for (var i = 0; i < items.length; i++) {
+                            if (items[i].Type.toLowerCase().indexOf(query.toLowerCase()) >= 0 || items[i].AssetName.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
+                        }
+                        return found; //return array with mathced indexes
+                    },
+                    emptyTemplate: `
+                        <div class="block text-align-center">
+                            <i class="f7-icons icon-no-alarms text-color-gray size-150"></i>
+                            <p>${ LANGUAGE.PROMPT_MSG01 }</p>
+
+                        </div>  
+                    `,
+                      // List item Template7 template
+                    renderItem: function(item){
+                        var ret = 
+                            `<li data-customer-phone="${ item.CustomerPhone }">
+                                <div class="item-content item-link no-bg-arrow-right">
+                                    <div class="item-media ${ item.Status && item.Status == '1' ? 'text-color-red' : 'text-color-green' }"><i class="f7-icons icon-notification"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            <div class="item-header">${ item.Time }</div>
+                                            ${ item.Type }
+                                            <div class="item-footer">${ item.AssetName }</div>
+                                        </div>
+                                        <div class="item-after">
+                                            <a href="#" class="item-link">
+                                                <i class="f7-icons size-25 icon-menu-asset"></i>
+                                            </a>                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>`;
+
+                        return ret;
+                    },
+                      // Item height
+                    height: app.theme === 'ios' ? 67 : 68,
+                });
+
+                virtualListEl.on('click', 'li', function(e){
+                    if ($$(e.target).hasClass('icon-menu-asset')) {
+                        self.openAlarmMenu(e);
+                    }else{                    
+                        self.loadPageAlarmInfo();
+                    }
+                    
+                });
+
+                virtualListEl.on('taphold', 'li', function (e) {                    
+                    self.openAlarmMenu(e);
+                });
+
+                setTimeout(function(){
+                    virtualList.prependItems([
+                        {
+                            CustomerPhone: '+1300 345 23 89',
+                            Time: '25/12/2018 13:44:56',
+                            Type: 'Tilt/Shock',
+                            AssetName: 'BMW X6 FG4567',
+                            Status: '1',
+                        },
+                         {
+                            CustomerPhone: '+1300 345 23 89',
+                            Time: '25/12/2018 13:44:56',
+                            Type: 'Low battery',
+                            AssetName: 'Alex Car',
+                            Status: '2',
+                        },
+                         {
+                            CustomerPhone: '+1300 345 23 89',
+                            Time: '25/12/2018 13:44:56',
+                            Type: ' Power Disconnection',
+                            AssetName: 'GT 500',
+                            Status: '2',
+                        }
+                    ]);
+                }, 2000);
+
+                var $ptrContent = page.$el.find('.ptr-content');
+                $ptrContent.on('ptr:refresh', function (e) {
+                    setTimeout(function () {
+                        virtualList.prependItems([
+                            {
+                                CustomerPhone: '+1300 345 23 89',
+                                Time: '25/12/2018 13:44:56',
+                                Type: 'Tilt/Shock',
+                                AssetName: 'BMW X6 FG4567',
+                                Status: '1',
+                            }
+                        ]);
+                        app.ptr.done(); // or e.detail();
+                    }, 2000); 
+                });
+                
+                if (localStorage.ACCOUNT) {
+                    self.$app.methods.login();
+                }else{
+                    self.$app.methods.logout();
+                }
+               
+                
+            },     
+            pageAfterOut: function () {
+                // page has left the view
+            },
+            pageBeforeIn: function(){
+                               
+                    
+            },
+            pageAfterIn: function(e, page) {
+                
+               // console.log('here');
+                //if (1) {
+                    
+                //}else{
+
+                //}
+                
+            }
+        }
+    };
+</script>

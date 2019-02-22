@@ -1,0 +1,87 @@
+<template>
+
+            <div class="login-screen">
+                <div class="view">
+                    <div class="page">
+                        <div class="page-content login-screen-content">               
+                            <div class="block text-align-center margin-top-48 margin-bottom-48">
+                                <div class="logo">
+                                    <img src="resources/images/logo.png" alt="">
+                                </div>
+                            </div>                     
+                            <form class="login-form">
+                                <div class="list no-hairlines no-hairlines-between">
+                                    <ul>
+                                        <li class="item-content item-input">
+                                            <div class="item-inner">
+                                                <!-- <div class="item-title item-label text-color-black">{{@global.LANGUAGE.LOGIN_MSG02}}</div> -->
+                                                <div class="item-input-wrap">
+                                                    <input type="text" name="username" placeholder="{{@global.LANGUAGE.LOGIN_MSG02}}" value="" required validate >
+                                                     <span class="input-clear-button"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="item-content item-input">
+                                            <div class="item-inner">
+                                                <!-- <div class="item-title item-label text-color-black">{{@global.LANGUAGE.LOGIN_MSG03}}</div> -->
+                                                <div class="item-input-wrap">
+                                                    <input type="password" name="password" placeholder="{{@global.LANGUAGE.LOGIN_MSG03}}" value="" required validate>
+                                                    <span class="input-clear-button password-clear-button"></span>
+                                                    <span class="password-toggle text-color-gray" @click="togglePassword"><i class="f7-icons icon-password "></i></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="forget_pwd_wrapper text-align-right"> 
+                                            <a href="http://forgot.quiktrak.eu/password/" target="_blank" class="color-white external">{{@global.LANGUAGE.LOGIN_MSG05}}</a>
+                                        </li>                                       
+                                    </ul>
+                                </div>
+                                <div class="block">
+                                    <button type="submit" class="button button-fill button-big bg-color-dealer">{{@global.LANGUAGE.LOGIN_MSG04}}</button>
+                                </div>                                     
+                            </form>               
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</template>
+
+<script>
+  // script must return component object
+    return {
+        data: function () {
+            var ret = {};            
+            
+
+            return ret;
+        },
+        methods: {
+            togglePassword: function(e){
+                console.log(e.target);
+                var parrent = $$(e.target).closest('.password-toggle');
+                var input = parrent.siblings('input[name="password"]');
+                if (input.attr('type') == 'password') {
+                    input.attr('type','text');
+                    parrent.addClass('text-color-black');
+                }else{
+                    input.attr('type','password');
+                    parrent.removeClass('text-color-black');
+                }
+            }
+        },
+       
+        on: {
+            pageInit: function (e, page) { 
+                var self = this;
+                console.log('init!!');
+                
+            },     
+            pageAfterOut: function () {
+                // page has left the view
+            },
+        }
+    };
+</script>
+
+            

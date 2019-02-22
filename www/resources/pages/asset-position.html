@@ -1,0 +1,104 @@
+<template>
+<!-- Page, data-name contains page name which can be used in callbacks -->
+        <div class="page " data-name="asset-position" > <!-- page-with-subnavbar -->
+        <!-- Top Navbar -->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="left">
+                        <a href="#" class="link back">
+                            <i class="icon icon-back"></i>
+                            <span class="ios-only">{{@global.LANGUAGE.COM_MSG06}}</span>
+                        </a>
+                    </div>
+                    <div class="title sliding">{{AssetName}}</div>
+                    <div class="right">
+                        
+                    </div>
+                </div>
+            </div>
+                       
+        
+            <!-- Scrollable page content-->
+            <div class="page-content">   
+             
+                <div id="map"></div>
+               
+
+            </div>
+        </div>
+    </template>
+
+
+<script>
+  // script must return component object
+    return {
+        data: function () {
+            var self = this;
+            var ret = {};         
+            //ret.AlarmType = decodeURIComponent(self.$route.params.AlarmType);   
+            //app.methods.storageSetupTime();           
+            ret.AssetName = 'Alex Car';
+            return ret;
+        },
+        methods: {
+            
+        },
+       
+        on: {
+            pageInit: function (e, page) { 
+                var self = this;                   
+               
+                var MapTrack;     
+
+                var latlng = [50.449354, 30.523110];
+                MapTrack = self.$app.methods.createMap({ target: 'map', latLng: latlng, zoom: 15 });   
+                L.marker(latlng, {icon: self.$app.data.MarkerIcon[0]}).addTo(MapTrack); 
+
+                /*var point = L.marker(latlng, {icon: self.data.MarkerIcon[0]});                        
+                var markerData = self.methods.getMarkerDataTable(POSINFOASSETLIST[key]);
+                        
+                point                            
+                    .bindPopup(markerData,{maxWidth:self.data.MaxMapPopupWidth, closeButton: false})
+                    .on('popupopen', function (e) {                               
+                        if (!POSINFOASSETLIST[key].posInfo.customAddress) {
+                            Protocol.Helper.getAddressByGeocoder({lat: POSINFOASSETLIST[key].posInfo.lat, lng: POSINFOASSETLIST[key].posInfo.lng},function(address){                           
+                                POSINFOASSETLIST[key].posInfo.customAddress = address;                               
+                                markerData = self.methods.getMarkerDataTable(POSINFOASSETLIST[key]);                           
+                                e.target.setPopupContent(markerData);                                        
+                                e.popup.update();                                       
+                            }); 
+                        }                                 
+                    });
+                if (app.device.desktop) {
+                    point.bindTooltip(POSINFOASSETLIST[key].Name,{permanent: false, direction: 'right'});
+                }
+                point._custom_asset_imei = key;
+
+                point.addTo(AllMarkersGroup);
+                POSINFOASSETLIST[key].markerId = AllMarkersGroup.getLayerId(point); 
+*/
+
+                //window.PosMarker[asset].addTo(MapTrack);
+                                          
+                
+            },     
+            pageAfterOut: function () {
+                // page has left the view
+            },
+            pageBeforeIn: function(){
+                               
+                    
+            },
+            pageAfterIn: function(e, page) {
+                
+               // console.log('here');
+                //if (1) {
+                    
+                //}else{
+
+                //}
+                
+            }
+        }
+    };
+</script>

@@ -1,0 +1,298 @@
+<template>
+<!-- Page, data-name contains page name which can be used in callbacks -->
+        <div class="page " data-name="client-info" > <!-- page-with-subnavbar -->
+        <!-- Top Navbar -->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="left">
+                        <a href="#" class="link back">
+                            <i class="icon icon-back"></i>
+                            <span class="ios-only">{{@global.LANGUAGE.COM_MSG06}}</span>
+                        </a>
+                    </div>
+                    <div class="title sliding">{{AlarmType}}</div>
+                    <div class="right">
+                        <a href="/asset-position/" class="link">
+                            <i class="f7-icons icon-position"></i>
+                        </a>
+                    </div>
+
+                   
+                </div>
+            </div>
+            
+            <div class="toolbar no-shadow toolbar-bottom-md tabbar-custom2">
+                <div class="toolbar-inner row bottom-buttons-wrapper" data-customer-phone="{{CustomerPhone}}"> 
+                    <button @click="clickClose" class="col button button-fill button-big color-red " >{{@global.LANGUAGE.COM_MSG03}}</button>
+                    <button @click="clickSMS" class="col button button-fill button-big color-orange " >{{@global.LANGUAGE.COM_MSG04}}</button>
+                    <button @click="clickCall" class="col button button-fill button-big color-green ">{{@global.LANGUAGE.COM_MSG05}}</button>
+                </div>
+            </div>
+        
+            <!-- Scrollable page content-->
+            <div class="page-content">   
+                <div class="block-title">{{@global.LANGUAGE.ALARM_INFO_MSG00}}</div>
+                <div class="list no-hairlines">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-asset"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG01}}</div>
+                                        Alex car                               
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>                        
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-notification"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.ALARM_INFO_MSG02}}</div>
+                                        Tilt Shock                                   
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a @click="editNotes" href="#" class="item-content item-link">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-notes"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title multilpe-rows">
+                                        <div class="item-header">{{@global.LANGUAGE.ALARM_INFO_MSG03}}</div>
+                                        {{Notes}}                                 
+                                    </div>                                    
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>             
+                
+                <div class="block-title">{{@global.LANGUAGE.HOME_MSG04}}</div>
+                <div class="list no-hairlines  ">
+                    <ul>                   
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-name"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG00}}</div>
+                                        Alex                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content ">
+                                <div class="item-media text-color-gray"></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG01}}</div>
+                                        Johnson                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content ">
+                                <div class="item-media text-color-gray"></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG02}}</div>
+                                        aljohnson                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content ">
+                                <div class="item-media text-color-gray"></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG03}}</div>
+                                        aljohnson                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content ">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-message"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG04}}</div>
+                                        Email                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li data-customer-phone="{{CustomerPhone}}">
+                            <div class="item-content "  @click="clickCall">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-call"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title" >
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG05}}</div>
+                                        +1300 345 23 89                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <div class="block-title">{{@global.LANGUAGE.CLIENT_INFO_MSG06}}</div>
+                <div class="list no-hairlines no-margin-top list-alarm ">
+                    <ul>                   
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-name"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG00}}</div>
+                                        Alex                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content ">
+                                <div class="item-media text-color-gray"></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG01}}</div>
+                                        Johnson                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>                        
+                        <li>
+                            <div class="item-content ">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-message"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG04}}</div>
+                                        Email                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li data-customer-phone="{{CustomerPhone}}">
+                            <div class="item-content " @click="clickCall" >
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-call"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title" >
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG05}}</div>
+                                        +1300 345 23 89                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>                        
+                    </ul>
+                </div>
+                <div class="block-title">{{@global.LANGUAGE.CLIENT_INFO_MSG06}}</div>
+                <div class="list no-hairlines no-margin-top list-alarm ">
+                    <ul>                   
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-name"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG00}}</div>
+                                        Alex                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content ">
+                                <div class="item-media text-color-gray"></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG01}}</div>
+                                        Johnson                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>                        
+                        <li>
+                            <div class="item-content ">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-message"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG04}}</div>
+                                        Email                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li data-customer-phone="{{CustomerPhone}}">
+                            <div class="item-content "  @click="clickCall">
+                                <div class="item-media text-color-gray"><i class="f7-icons icon-call"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title" >
+                                        <div class="item-header">{{@global.LANGUAGE.CLIENT_INFO_MSG05}}</div>
+                                        +1300 345 23 89                                    
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li>                        
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </template>
+
+
+<script>
+  // script must return component object
+    return {
+        data: function () {
+            var self = this;
+            var ret = {
+                CustomerPhone: '+1300 345 23 89',
+                Notes: '...',
+            };         
+            ret.AlarmType = decodeURIComponent(self.$route.params.AlarmType);   
+            //app.methods.storageSetupTime();           
+
+            return ret;
+        },
+        methods: {
+            clickSMS: function(){
+
+            },
+            clickCall: function(e){
+                var parent = $$(e.target).closest('[data-customer-phone]');
+                if (parent && parent.length) {
+                    this.$app.methods.callTo(parent.data('customer-phone'));
+                }
+            },
+            clickClose: function(){
+
+            },
+            editNotes: function(){
+                var self = this;
+                
+                var dialog = app.dialog.prompt(LANGUAGE.PROMPT_MSG00, LANGUAGE.ALARM_INFO_MSG03, function(value){
+                    self.$setState({ Notes: value });
+                });
+                dialog.$el.find('input').val(self.Notes);
+                
+            }
+        },
+       
+        on: {
+            pageInit: function (e, page) { 
+                var self = this;   
+                
+               
+               
+                
+            },     
+           
+        }
+    };
+</script>
