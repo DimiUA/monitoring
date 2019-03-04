@@ -1,0 +1,153 @@
+<template>
+<!-- Page, data-name contains page name which can be used in callbacks -->
+        <div class="page " data-name="alarm-history" > <!-- page-with-subnavbar -->
+        <!-- Top Navbar -->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="left">
+                        <a href="#" class="link back">
+                            <i class="icon icon-back"></i>
+                            <span class="ios-only">{{@global.LANGUAGE.COM_MSG06}}</span>
+                        </a>
+                    </div>
+                    <div class="title sliding">{{AssetName}}</div>
+                    <div class="right">
+                        
+                        
+                    </div>
+
+                   
+                </div>
+            </div>
+            
+            
+        
+            <!-- Scrollable page content-->
+            <div class="page-content">  
+                <div class="block">
+                    {{@global.LANGUAGE.ALARM_HISTORY_MSG00}}
+                </div> 
+                <div class="list ">
+                    <ul>
+                        <li class="item-content item-input">
+                            <!-- <a href="#" class="item-content item-input item-link"> -->
+                                <div class="item-media">
+                                    <i class="f7-icons icon-calendar"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title item-label">{{@global.LANGUAGE.ALARM_HISTORY_MSG01}}</div>
+                                    <div class="item-input-wrap input-dropdown-wrap">
+                                        <select name="time-period" placeholder="Please choose...">
+                                            <option value="1">1 {{@global.LANGUAGE.COM_MSG13}}</option>
+                                            <option value="2">2 {{@global.LANGUAGE.COM_MSG14}}</option>
+                                            <option value="3" selected>3 {{@global.LANGUAGE.COM_MSG13}}</option>
+                                            <option value="4">4 {{@global.LANGUAGE.COM_MSG14}}</option>
+                                            <option value="5">5 {{@global.LANGUAGE.COM_MSG13}}</option>
+                                            <option value="6">6 {{@global.LANGUAGE.COM_MSG14}}</option>
+                                            <option value="7">7 {{@global.LANGUAGE.COM_MSG13}}</option>
+                                            <option value="8">8 {{@global.LANGUAGE.COM_MSG14}}</option>
+                                            <option value="9">9 {{@global.LANGUAGE.COM_MSG13}}</option>
+                                            <option value="10">10 {{@global.LANGUAGE.COM_MSG14}}</option>
+                                            <option value="11">11 {{@global.LANGUAGE.COM_MSG14}}</option>
+                                            <option value="12">12 {{@global.LANGUAGE.COM_MSG14}}</option>
+                                            <option value="13">13 {{@global.LANGUAGE.COM_MSG14}}</option>
+                                            <option value="14">14 {{@global.LANGUAGE.COM_MSG14}}</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            <!-- </a> -->
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="list no-hairlines">
+                    <ul>
+                        {{#each AlarmList}}
+                        <li>
+                            <div class="item-content">                                
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        {{AlarmType}}
+                                        <div class="item-footer">{{AlarmDate}}</div>                         
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </li> 
+                        {{else}}
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        {{@global.LANGUAGE.PROMPT_MSG05}}
+                                    </div>
+                                </div>
+                            </div>                            
+                        </li>
+                        {{/each}}                       
+                        
+                    </ul>
+                </div>             
+                
+                
+
+            </div>
+        </div>
+    </template>
+
+
+<script>
+  // script must return component object
+    return {
+        data: function () {
+            var self = this;
+            var ret = {
+                AssetName: 'Alex Car',
+                AlarmList: [
+                    {
+                        AlarmType: 'Tilt/Shock',
+                        AlarmDate: '25/12/2018 13:44:56',
+                    },
+                    {
+                        AlarmType: 'Low battery',
+                        AlarmDate: '24/12/2018 14:12:33',
+                    },
+                    {
+                        AlarmType: 'Tilt/Shock',
+                        AlarmDate: '23/12/2018 12:23:11',
+                    },
+                ],          
+            };         
+            
+            //app.methods.storageSetupTime();           
+
+            return ret;
+        },
+        methods: {
+            
+            clickChangeStatus: function(){
+                var self = this;
+                
+                self.$app.methods.dialogChangeStatus();
+                /*var dialog = app.dialog.prompt(LANGUAGE.PROMPT_MSG00, LANGUAGE.ALARM_INFO_MSG03, function(value){
+                    self.$setState({ Notes: value });
+                });
+                dialog.$el.find('input').val(self.Notes);*/
+                
+            }
+        },
+       
+        on: {
+            pageInit: function (e, page) { 
+                var self = this;   
+                
+                var timePeriodEl = $$(page.$el).find('[name="time-period"]');
+
+
+               
+                
+            },     
+           
+        }
+    };
+</script>

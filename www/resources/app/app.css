@@ -209,6 +209,10 @@
     word-wrap: break-word;
 }
 
+
+.md .theme-dark .dialog-inner .icon-radio{
+    border-color: #6d6d6d;
+}
 .md .theme-dark .dialog-inner input{
 	color: #212121;
 }	

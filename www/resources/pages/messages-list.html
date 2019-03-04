@@ -1,0 +1,176 @@
+<template>
+<!-- Page, data-name contains page name which can be used in callbacks -->
+        <div class="page " data-name="messages-list" > <!-- page-with-subnavbar -->
+        <!-- Top Navbar -->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="left">
+                        <a href="/panel-left/" class="link icon-only panel-open" data-panel="left">
+                            <i class="icon f7-icons ios-only">menu</i>
+                            <i class="icon material-icons md-only">menu</i>
+                          </a>
+                    </div>
+                    <div class="title sliding">{{@global.LANGUAGE.MENU_MSG02}}</div>
+                    <div class="right">
+                        <a class="link icon-only searchbar-enable" data-searchbar=".searchbar-message-list">
+                            <i class="icon f7-icons ios-only">search_strong</i>
+                            <i class="icon material-icons md-only">search</i>
+                        </a>
+                    </div>
+
+                    <form data-search-container=".list-messages" data-search-item=".li" data-search-in=".item-title" class="searchbar searchbar-init searchbar-expandable searchbar-message-list">
+                        <div class="searchbar-inner">
+                            <div class="searchbar-input-wrap">
+                                <input type="search" placeholder="{{@global.LANGUAGE.COM_MSG02}}"/>
+                                <i class="searchbar-icon"></i>
+                                <span class="input-clear-button"></span>
+                            </div>
+                            <span class="searchbar-disable-button text-color-white" >{{@global.LANGUAGE.COM_MSG01}}</span>
+                        </div>
+                    </form>
+
+                   
+                </div>
+            </div>
+          
+        
+            <!-- Scrollable page content-->
+            <div class="page-content ptr-content">  
+                <div class="ptr-preloader">
+                    <div class="preloader"></div>
+                    <div class="ptr-arrow"></div>
+                </div>
+                
+                <div class="block  searchbar-not-found">
+                    {{@global.LANGUAGE.COM_MSG07}}
+                </div>
+                <div class="list virtual-list searchbar-found no-hairlines no-margin-top list-messages">
+                    
+                </div>             
+                
+                
+
+            </div>
+        </div>
+    </template>
+
+
+<script>
+  // script must return component object
+    return {
+        data: function () {
+            var self = this;
+            var ret = {};            
+            //app.methods.storageSetupTime();           
+
+            return ret;
+        },
+        methods: {
+            loadPageClientInfo: function(e){
+                
+                mainView.router.navigate({
+                        name: 'client-info',
+                       
+                    });
+            },
+            
+        },
+        on: {
+            pageInit: function (e, page) { 
+                var self = this;   
+
+                var virtualListEl = page.$el.find('.list-messages');
+                var items = [];
+
+                var virtualList = app.virtualList.create({
+                      // List Element
+                    el: virtualListEl,
+                      // Pass array with items
+                    items: items,
+                      // Custom search function for searchbar
+                    searchAll: function (query, items) {
+                        var found = [];
+                        for (var i = 0; i < items.length; i++) {
+                            if (items[i].Theme.toLowerCase().indexOf(query.toLowerCase()) >= 0  || query.trim() === '') found.push(i);
+                        }
+                        return found; //return array with mathced indexes
+                    },
+                    emptyTemplate: `
+                        <div class="block text-align-center">
+                            <i class="f7-icons icon-no-messages text-color-gray size-150"></i>
+                            <p>${ LANGUAGE.PROMPT_MSG06 }</p>
+
+                        </div>  
+                    `,
+                      // List item Template7 template
+                    renderItem: function(item){
+                        var ret = 
+                            `<li>
+                                <a href="/messages/" class="item-content item-link ">
+                                    <div class="item-media text-color-gray"><i class="f7-icons icon-message"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            <div class="item-header">${ item.Time }</div>
+                                            ${ item.Theme }                                            
+                                        </div>
+                                        
+                                    </div>
+                                </a>
+                            </li>`;
+
+                        return ret;
+                    },
+                      // Item height
+                    height: app.theme === 'ios' ? 53.6 : 54.4,
+                });
+                               
+                app.progressbar.show();
+
+                setTimeout(function(){
+                    virtualList.prependItems([
+                        {
+                            Theme: 'Power Disconnection(Alex Car)',
+                            Time: '23/12/2018 14:21:20',                                
+                        }
+                        
+                    ]);
+                    app.progressbar.hide();
+                }, 1500);
+
+                var $ptrContent = page.$el.find('.ptr-content');
+                $ptrContent.on('ptr:refresh', function (e) {
+                    setTimeout(function () {
+                        virtualList.prependItems([
+                            {
+                                Theme: 'Tilt/Shock(BMW X6 FG4567)',
+                                Time: '25/12/2018 13:44:56',                                
+                            }
+                        ]);
+                        app.ptr.done($ptrContent); // or e.detail();
+                    }, 2000); 
+                });
+                
+                
+               
+                
+            },     
+            pageAfterOut: function () {
+                // page has left the view
+            },
+            pageBeforeIn: function(){
+                               
+                    
+            },
+            pageAfterIn: function(e, page) {
+                
+               // console.log('here');
+                //if (1) {
+                    
+                //}else{
+
+                //}
+                
+            }
+        }
+    };
+</script>

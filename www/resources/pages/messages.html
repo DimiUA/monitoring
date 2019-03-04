@@ -1,0 +1,116 @@
+<template>
+<!-- Page, data-name contains page name which can be used in callbacks -->
+        <div class="page " data-name="messages" > <!-- page-with-subnavbar -->
+        <!-- Top Navbar -->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="left">
+                        <a href="#" class="link back">
+                            <i class="icon icon-back"></i>
+                            <span class="ios-only">{{@global.LANGUAGE.COM_MSG06}}</span>
+                        </a>
+                    </div>
+                    <div class="title sliding">{{Theme}}</div>
+                    <div class="right">
+                        
+                    </div>
+
+                   
+                </div>
+            </div>
+            
+            <div class="toolbar no-shadow toolbar-bottom-md tabbar-custom2">
+                <div class="toolbar-inner row bottom-buttons-wrapper" data-customer-phone="{{CustomerPhone}}"> 
+                    <button @click="clickEmail" class="col button button-fill button-big color-blue " >{{@global.LANGUAGE.COM_MSG08}}</button>
+                    <button @click="clickSMS" class="col button button-fill button-big color-orange " >{{@global.LANGUAGE.COM_MSG04}}</button>
+                    <button @click="clickCall" class="col button button-fill button-big color-green ">{{@global.LANGUAGE.COM_MSG05}}</button>
+                </div>
+            </div>
+        
+            <!-- Scrollable page content-->
+            <div class="page-content">   
+                
+                <div class="list no-hairlines no-hairlines-between alarm-messages">
+                    <ul>
+                        <li class="card"> 
+                            <div class="card-header">
+                                <div class="card-header-img text-color-red">
+                                    <i class="f7-icons icon-arrow-from"></i>
+                                </div>
+                                <div class="card-header-inner">
+                                    <div class="card-date">25/12/2018 19:10:14</div>
+                                    <div class="card-title">FROM: clientmail@mail.com</div>
+                                </div>
+                                    
+                            </div>
+                            <div class="card-content card-content-padding">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
+                        </li>
+                        <li class="card"> 
+                            <div class="card-header">
+                                <div class="card-header-img text-color-green">
+                                    <i class="f7-icons icon-arrow-to"></i>
+                                </div>
+                                <div class="card-header-inner">
+                                    <div class="card-date">25/12/2018 18:50:56</div>
+                                    <div class="card-title">TO: clientmail@mail.com</div>
+                                </div>
+                            </div>
+                            <div class="card-content card-content-padding">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                        </li>
+                    </ul>
+                </div>
+                <div >
+                    
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+<script>
+  // script must return component object
+    return {
+        data: function () {
+            var self = this;
+            var ret = {
+                CustomerPhone: '+1300 345 23 89',
+                Theme: 'Power Disconnection(Alex Car)',
+            };         
+            
+            //app.methods.storageSetupTime();           
+
+            return ret;
+        },
+        methods: {
+            clickSMS: function(){
+
+            },
+            clickCall: function(e){
+                var self = this;
+                var parent = $$(e.target).closest('[data-customer-phone]');
+                if (parent && parent.length) {
+                    self.$app.methods.callTo(parent.data('customer-phone'));
+                }
+            },
+            clickEmail: function(){
+                var self = this; 
+                self.$app.methods.dialogSendMessage({
+                    email: 'user@email.com',
+                    theme: 'Power Disconection(GT 500)',
+                });
+            },
+            
+        },
+       
+        on: {
+            pageInit: function (e, page) { 
+                var self = this;   
+                
+               
+               
+                
+            },     
+           
+        }
+    };
+</script>
