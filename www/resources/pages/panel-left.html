@@ -26,6 +26,14 @@
                                         </div>
                                     </div>
                                 </li>
+                                <li>
+                                    <div @click="messages" class="item-content">
+                                        <div class="item-media"><i class="f7-icons icon-message text-color-gray"></i></div>
+                                        <div class="item-inner text-color-black">
+                                            <div class="item-title">{{@global.LANGUAGE.MENU_MSG02}}</div>
+                                        </div>
+                                    </div>
+                                </li>
                                
                                 <li>
                                     <a @click="logout" class="item-content" >
@@ -71,7 +79,16 @@
             home: function(){       
                 this.$app.panel.left.close();  
 
-                mainView.router.back('/',{force: true});
+                mainView.router.back('/');
+                 
+            },
+            messages: function(){       
+                this.$app.panel.left.close();  
+
+                 mainView.router.navigate({
+                        name: 'messages-list',
+                       
+                    });
                  
             },
             /*trips: function(){

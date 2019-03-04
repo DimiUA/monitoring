@@ -33,6 +33,22 @@ routes = [
         name: 'asset-position',        
         componentUrl: './resources/pages/asset-position.html',        
     },
+    {
+        path: '/alarm-history/',        
+        name: 'alarm-history',        
+        componentUrl: './resources/pages/alarm-history.html',        
+    },
+    {
+        path: '/messages-list/',        
+        name: 'messages-list',        
+        componentUrl: './resources/pages/messages-list.html',        
+    },
+    {
+        path: '/messages/',        
+        name: 'messages',        
+        componentUrl: './resources/pages/messages.html',        
+    },
+
  
   // Default route (404 page). MUST BE THE LAST
   {

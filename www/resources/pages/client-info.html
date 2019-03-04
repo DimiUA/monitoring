@@ -21,6 +21,7 @@
             
             <div class="toolbar no-shadow toolbar-bottom-md tabbar-custom2">
                 <div class="toolbar-inner row bottom-buttons-wrapper" data-customer-phone="{{CustomerPhone}}"> 
+                    <button @click="clickEmail" class="col button button-fill button-big color-blue " >{{@global.LANGUAGE.COM_MSG08}}</button>
                     <button @click="clickSMS" class="col button button-fill button-big color-orange " >{{@global.LANGUAGE.COM_MSG04}}</button>
                     <button @click="clickCall" class="col button button-fill button-big color-green ">{{@global.LANGUAGE.COM_MSG05}}</button>
                 </div>
@@ -223,6 +224,9 @@
                 if (parent && parent.length) {
                     this.$app.methods.callTo(parent.data('customer-phone'));
                 }
+            },
+            clickEmail: function(){
+
             },
         },
        

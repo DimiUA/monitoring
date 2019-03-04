@@ -9,7 +9,7 @@ $('#app').prepend(compiledTemplate);
 var app  = new Framework7({
     root: '#app', // App root element
     id: 'com.sinopacific.monitoring', // App bundle ID
-    name: 'QuikTtrak Monitoring', // App name
+    name: 'QuikTrak Monitoring', // App name
     theme: 'auto', // Automatic theme detection
 	touch: {
 	    tapHold: true //enable tap hold events
@@ -91,6 +91,88 @@ var app  = new Framework7({
             if (phone) {
                 window.open('tel:'+phone);
             }
+        },
+        dialogSendMessage: function(params){
+        	var content = `
+				<div class="list no-hairlines no-margin">
+                    <ul>                        
+                        <li>
+                            <div class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">E-mail</div>
+                                    <div class="item-input-wrap">
+                                        <input type="email" name="email" placeholder="E-mail" value="${ params.email }" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Theme</div>
+                                    <div class="item-input-wrap">
+                                        <input type="text" name="theme" placeholder="Your name" value="${ params.theme }" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">${ LANGUAGE.ALARM_INFO_MSG04 }</div>
+                                    <div class="item-input-wrap">
+                                        <textarea name="message" class="" placeholder="${ LANGUAGE.PROMPT_MSG04 }"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>                    
+                </div>
+        	`;
+
+        	app.dialog.confirm(content, LANGUAGE.COM_MSG11, function(){
+        		console.log('send');
+        	});
+        },
+        dialogChangeStatus: function(params){
+        	var content = `
+				<div class="list no-hairlines no-margin">
+                    <ul>                        
+                        <li>
+						    <label class="item-radio item-content">
+						        <input type="radio" name="radio-change-status" value="suspend" checked />
+						        <i class="icon icon-radio"></i>
+						        <div class="item-inner">
+						          	<div class="item-title">${ LANGUAGE.COM_MSG12 }</div>
+						        </div>
+						    </label>
+						</li>
+						<li>
+						    <label class="item-radio item-content">
+						        <input type="radio" name="radio-change-status" value="close"/>
+						        <i class="icon icon-radio"></i>
+						        <div class="item-inner">
+						          	<div class="item-title">${ LANGUAGE.COM_MSG03 }</div>
+						        </div>
+						    </label>
+					    </li>
+                        <li>
+                            <div class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">${ LANGUAGE.ALARM_INFO_MSG03 }</div>
+                                    <div class="item-input-wrap">
+                                        <textarea name="notes" class="" placeholder="${ LANGUAGE.PROMPT_MSG03 }"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>                    
+                </div>
+        	`;
+
+        	app.dialog.confirm(content, LANGUAGE.HOME_MSG01, function(){
+        		console.log('send');
+        	});
         },
         createMap: function(option){
             var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { name: 'osm', attribution: '' });            

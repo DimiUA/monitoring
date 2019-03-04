@@ -22,10 +22,10 @@
                         <div class="searchbar-inner">
                             <div class="searchbar-input-wrap">
                                 <input type="search" placeholder="{{@global.LANGUAGE.COM_MSG02}}"/>
-                                    <i class="searchbar-icon"></i>
+                                <i class="searchbar-icon"></i>
                                 <span class="input-clear-button"></span>
                             </div>
-                            <span class="searchbar-disable-button">{{@global.LANGUAGE.COM_MSG01}}</span>
+                            <span class="searchbar-disable-button text-color-white">{{@global.LANGUAGE.COM_MSG01}}</span>
                         </div>
                     </form>
 
@@ -47,6 +47,7 @@
                 <div class="list virtual-list searchbar-found no-hairlines no-margin-top list-alarm">
                     
                 </div>             
+                
                 
 
             </div>
@@ -82,11 +83,18 @@
                 
                
             },
+            loadPageAlarmHistory: function(){
+                mainView.router.navigate({
+                        name: 'alarm-history',
+                       
+                    });
+            },
             openAlarmMenu: function(e){
                 var self = this;
 
                
-               
+         
+      
                /* var Status = `<label class="toggle">
                                    <span> ${ LANGUAGE.HOME_MSG01 } </span>
                                   <input type="checkbox">
@@ -101,14 +109,20 @@
                         },
                     ],
                     [
-                       /* {
-                            text: Status,
-                            icon: '<i class="f7-icons icon-notification text-color-gray"></i>',
+                        {
+                            text: LANGUAGE.HOME_MSG01,
+                            icon: '<i class="f7-icons icon-notification text-color-red"></i>',
                             onClick: function () {
-                                //loadPageSettings();
+                                self.$app.methods.dialogChangeStatus();
                             },  
-                        },    */  
-                        
+                        },      
+                        {
+                            text: LANGUAGE.HOME_MSG06,
+                            icon: '<i class="f7-icons icon-alarm-history text-color-gray"></i>',
+                            onClick: function () {
+                                self.loadPageAlarmHistory();
+                            },  
+                        }, 
                         {
                             text: LANGUAGE.HOME_MSG02,
                             icon: '<i class="f7-icons icon-call text-color-gray"></i>',
@@ -120,8 +134,18 @@
                             },          
                         },
                         {
-                            text: LANGUAGE.HOME_MSG03, 
+                            text: LANGUAGE.HOME_MSG05, 
                             icon: '<i class="f7-icons icon-message text-color-gray"></i>', 
+                            onClick: function () {
+                                self.$app.methods.dialogSendMessage({
+                                    email: 'user@email.com',
+                                    theme: 'Power Disconection(GT 500)',
+                                });
+                            },          
+                        },
+                        {
+                            text: LANGUAGE.HOME_MSG03, 
+                            icon: '<i class="f7-icons icon-sms text-color-gray"></i>', 
                             onClick: function () {
                                 
                             },          
@@ -249,7 +273,7 @@
                                 Status: '1',
                             }
                         ]);
-                        app.ptr.done(); // or e.detail();
+                        app.ptr.done($ptrContent); // or e.detail();
                     }, 2000); 
                 });
                 

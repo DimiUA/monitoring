@@ -1,14 +1,14 @@
 /* Your app styles here */
 .f7-icons{
-	font-size: 20px;
+    font-size: 20px;
 }
-.size-20 { font-size: 20px }
-.size-22 { font-size: 22px }
-.size-25 { font-size: 25px }
-.size-29 { font-size: 29px }
-.size-36 { font-size: 36px }
-.size-50 { font-size: 50px }
-.size-75 { font-size: 75px }
+.size-20 {  font-size: 20px }
+.size-22 {  font-size: 22px }
+.size-25 {  font-size: 25px }
+.size-29 {  font-size: 29px }
+.size-36 {  font-size: 36px }
+.size-50 {  font-size: 50px }
+.size-75 {  font-size: 75px }
 .size-100 { font-size: 100px }
 .size-150 { font-size: 150px }
 
@@ -21,6 +21,15 @@
 .margin-bottom-24{ 	margin-bottom: 24px !important; }
 .margin-bottom-32{ 	margin-bottom: 32px !important; }
 .margin-bottom-48{ 	margin-bottom: 48px !important; }
+
+.margin-auto{
+    margin: auto !important;
+}
+
+.flex-direction-reverse {
+    flex-direction: row-reverse !important;
+}
+
 
 .ios .theme-dealer .navbar, 
 .md .theme-dealer .navbar{
@@ -213,7 +222,7 @@
     right: auto;
     bottom: 0;
     left: 0;
-    height: 2px;
+    height: 1px;
     width: 100%;
     -webkit-transform-origin: 50% 100%;
     transform-origin: 50% 100%;
@@ -226,7 +235,43 @@
 	user-select: none;
 }
 
+.md .dialog .list {
 
+}
+
+.md .dialog .list .item-content,
+.ios .dialog .list .item-content{
+    text-align: left;
+    padding-left: 0;
+}
+.ios .theme-dark.theme-dealer .dialog .item-inner:after{
+        background-color: #282829;
+}
+.md .dialog .list .item-content .item-label{
+  color: rgba(0,0,0,.65);
+}
+.md .dialog .list .item-content textarea{
+    color: #212121;
+}
+    .md .dialog .list .item-content textarea::-webkit-input-placeholder { 
+        color: #999999;
+    }
+    .md .dialog .list .item-content textarea::-moz-placeholder { 
+        color: #999999;
+    }
+    .md .dialog .list .item-content textarea:-ms-input-placeholder {
+        color: #999999;
+    }
+    .md .dialog .list .item-content textarea:-moz-placeholder { 
+        color: #999999;
+    }
+.ios .theme-dark.theme-dealer .dialog .item-content input,
+.ios .theme-dark.theme-dealer .dialog .item-content textarea{
+    color: #000;
+}
+.md .dialog .list label.item-radio>.icon-radio{
+    margin-right: 16px;
+}
 /* PANEL-LEFT */
 .menu-header{
 	padding: 32px 16px;
@@ -330,8 +375,18 @@
                 text-decoration: none;
             }
 
+/* LOCATION */
+
+.geolock-list{
+   /*  margin: 0  */
+}
+.md .geolock-list label.item-radio>.icon-radio{
+    margin-right: 16px;
+}
 
 /* MAP */
+
+
 #map{
 
     width: 100%;
@@ -424,3 +479,72 @@
         .leaflet-control-layers-overlays input[type=checkbox]:checked + span{
           color: #000;
         }
+
+
+/* MESSAGES */
+
+.alarm-messages{
+
+}
+    .alarm-messages .card .card-header{
+       /*  display: block; */
+    }
+    .ios .alarm-messages .card .card-header{
+        font-size: 15px;
+    }
+        .alarm-messages .card .card-header .card-header-img{
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-shrink: 0;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            -webkit-flex-wrap: nowrap;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;            
+        }
+        .alarm-messages .card .card-header .card-header-inner{
+            position: relative;
+            width: 100%;
+           /*  padding-top: 8px;
+           padding-bottom: 8px; */
+            min-width: 0;
+           /*  display: -webkit-box;
+           display: -webkit-flex;
+           display: -ms-flexbox; */
+            display: block;
+                margin-left: 16px;
+           /*  -webkit-box-pack: justify;
+           -webkit-justify-content: space-between;
+           -ms-flex-pack: justify;
+           justify-content: space-between;
+           -webkit-box-sizing: border-box;
+           box-sizing: border-box;
+           -webkit-box-align: center;
+           -webkit-align-items: center;
+           -ms-flex-align: center;
+           align-items: center;
+           -webkit-align-self: stretch;
+           -ms-flex-item-align: stretch;
+           align-self: stretch; */
+        }
+
+    .md .alarm-messages .card .card-date,
+    .ios .alarm-messages .card .card-date{
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 1.2;
+        white-space: normal;
+
+        color: #999999;
+    }
+    .alarm-messages .card .card-title{
+        
+    }

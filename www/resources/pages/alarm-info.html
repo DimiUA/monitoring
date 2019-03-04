@@ -12,6 +12,9 @@
                     </div>
                     <div class="title sliding">{{AlarmType}}</div>
                     <div class="right">
+                        <a @click="clickChangeStatus" href="#" class="link">
+                            <i class="f7-icons icon-notification text-color-red"></i>
+                        </a>
                         <a href="/asset-position/" class="link">
                             <i class="f7-icons icon-position"></i>
                         </a>
@@ -23,7 +26,7 @@
             
             <div class="toolbar no-shadow toolbar-bottom-md tabbar-custom2">
                 <div class="toolbar-inner row bottom-buttons-wrapper" data-customer-phone="{{CustomerPhone}}"> 
-                    <button @click="clickClose" class="col button button-fill button-big color-red " >{{@global.LANGUAGE.COM_MSG03}}</button>
+                    <button @click="clickEmail" class="col button button-fill button-big color-blue " >{{@global.LANGUAGE.COM_MSG08}}</button>
                     <button @click="clickSMS" class="col button button-fill button-big color-orange " >{{@global.LANGUAGE.COM_MSG04}}</button>
                     <button @click="clickCall" class="col button button-fill button-big color-green ">{{@global.LANGUAGE.COM_MSG05}}</button>
                 </div>
@@ -57,7 +60,7 @@
                             </div>
                         </li>
                         <li>
-                            <a @click="editNotes" href="#" class="item-content item-link">
+                            <a @click="clickChangeStatus" href="#" class="item-content item-link">
                                 <div class="item-media text-color-gray"><i class="f7-icons icon-notes"></i></div>
                                 <div class="item-inner">
                                     <div class="item-title multilpe-rows">
@@ -265,21 +268,27 @@
 
             },
             clickCall: function(e){
+                var self = this;
                 var parent = $$(e.target).closest('[data-customer-phone]');
                 if (parent && parent.length) {
-                    this.$app.methods.callTo(parent.data('customer-phone'));
+                    self.$app.methods.callTo(parent.data('customer-phone'));
                 }
             },
-            clickClose: function(){
-
+            clickEmail: function(){
+                var self = this; 
+                self.$app.methods.dialogSendMessage({
+                    email: 'user@email.com',
+                    theme: 'Power Disconection(GT 500)',
+                });
             },
-            editNotes: function(){
+            clickChangeStatus: function(){
                 var self = this;
                 
-                var dialog = app.dialog.prompt(LANGUAGE.PROMPT_MSG00, LANGUAGE.ALARM_INFO_MSG03, function(value){
+                self.$app.methods.dialogChangeStatus();
+                /*var dialog = app.dialog.prompt(LANGUAGE.PROMPT_MSG00, LANGUAGE.ALARM_INFO_MSG03, function(value){
                     self.$setState({ Notes: value });
                 });
-                dialog.$el.find('input').val(self.Notes);
+                dialog.$el.find('input').val(self.Notes);*/
                 
             }
         },

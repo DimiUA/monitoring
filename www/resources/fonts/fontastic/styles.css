@@ -95,3 +95,21 @@
 .icon-no-alarms:before {
   content: "\73";
 }
+.icon-sms:before {
+  content: "\74";
+}
+.icon-calendar:before {
+  content: "\75";
+}
+.icon-alarm-history:before {
+  content: "\76";
+}
+.icon-no-messages:before {
+  content: "\77";
+}
+.icon-arrow-to:before {
+  content: "\78";
+}
+.icon-arrow-from:before {
+  content: "\79";
+}

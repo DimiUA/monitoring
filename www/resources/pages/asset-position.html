@@ -16,7 +16,57 @@
                     </div>
                 </div>
             </div>
-                       
+            
+            <!-- <div class="toolbar no-shadow toolbar-bottom-md ">
+                <div class="toolbar-inner row bottom-buttons-wrapper no-gap"> 
+                    <div class="col">
+                            <label class="radio padding-right"><input type="radio" name="demo-radio-inline"><i class="icon-radio"></i></label>{{@global.LANGUAGE.ASSET_POSITION_MSG01}}
+                    </div>
+                    <div class="col text-align-center">
+                             {{@global.LANGUAGE.ASSET_POSITION_MSG00}}
+                    </div>
+                    <div class="col text-align-right">
+                             {{@global.LANGUAGE.ASSET_POSITION_MSG02}}<label class="radio padding-left"><input type="radio" name="demo-radio-inline"><i class="icon-radio"></i></label>
+                    </div>
+                </div> 
+            </div> -->
+
+            <div class="toolbar no-shadow toolbar-bottom-md ">
+                <div class="toolbar-inner"> 
+                    <div class="list geolock-list no-hairlines no-hairlines-between width-100">
+                      <ul class="row  no-gap" >
+                        <li class="col">
+                          <label class="item-radio item-content text-color-grey">
+                            <input type="radio" name="demo-radio" value="" checked />
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                              <div class="item-title">{{@global.LANGUAGE.COM_MSG09}}</div>
+                            </div>
+                          </label>
+                        </li>
+                        <li class="col">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title margin-auto">{{@global.LANGUAGE.ASSET_POSITION_MSG000}}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col">
+                          <label class="item-radio item-content flex-direction-reverse">
+                            <input type="radio" name="demo-radio" value=""/>
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner justify-content-flex-end">
+                              <div class="item-title">{{@global.LANGUAGE.COM_MSG10}}</div>
+                            </div>
+                          </label>
+                        </li>    
+                      </ul>
+                    </div>
+                </div> 
+            </div>
+
+
+                    
         
             <!-- Scrollable page content-->
             <div class="page-content">   
@@ -52,31 +102,93 @@
 
                 var latlng = [50.449354, 30.523110];
                 MapTrack = self.$app.methods.createMap({ target: 'map', latLng: latlng, zoom: 15 });   
-                L.marker(latlng, {icon: self.$app.data.MarkerIcon[0]}).addTo(MapTrack); 
+                //L.marker(latlng, {icon: self.$app.data.MarkerIcon[0]}).addTo(MapTrack); 
 
-                /*var point = L.marker(latlng, {icon: self.data.MarkerIcon[0]});                        
-                var markerData = self.methods.getMarkerDataTable(POSINFOASSETLIST[key]);
+                var point = L.marker(latlng, {icon: self.$app.data.MarkerIcon[0]});                        
+                //var markerData = self.methods.getMarkerDataTable(POSINFOASSETLIST[key]);
+                var markerData = ''; 
+                    markerData += '<table cellpadding="0" cellspacing="0" border="0" class="marker-data-table">';
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG001+'</td>';
+                    markerData +=       '<td class="marker-data-value">Alex Car</td>';
+                    markerData +=   '</tr>';          
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG002+'</td>';
+                    markerData +=       '<td class="marker-data-value">Stopped</td>';
+                    markerData +=   '</tr>';            
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG003+'</td>';
+                    markerData +=       '<td class="marker-data-value">01/03/2019 13:43:39</td>';
+                    markerData +=   '</tr>';
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG004+'</td>';
+                    markerData +=       '<td class="marker-data-value">193852 km</td>';
+                    markerData +=   '</tr>';
+                                    //if (launchHours) {
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG019+'</td>';
+                    markerData +=       '<td class="marker-data-value">1984:23:44</td>';
+                    markerData +=   '</tr>';    
+                                    //}
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG005+'</td>';
+                    markerData +=       '<td class="marker-data-value">0 km/h</td>';
+                    markerData +=   '</tr>'; 
+                                    //if (assetFeaturesStatus.acc) {
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG006+'</td>';
+                    markerData +=       '<td class="marker-data-value">OFF</td>';
+                    markerData +=   '</tr>';
+                                    //}            
+                            
+                                    //if (assetFeaturesStatus.fuel) {
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG009+'</td>';
+                    markerData +=       '<td class="marker-data-value">59 %</td>';
+                    markerData +=   '</tr>';
+                                    //}                           
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG010+'</td>';
+                    markerData +=       '<td class="marker-data-value">Southeast (149°)</td>';
+                    markerData +=   '</tr>';   
+                                    //if (positionType) {
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG013+'</td>';
+                    markerData +=       '<td class="marker-data-value ">GPS</td>';
+                    markerData +=   '</tr>';
+                                    //}                        
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG011+'</td>';
+                    markerData +=       '<td class="marker-data-value ">50.449354, 30.523110</td>';
+                    markerData +=   '</tr>';
+                    markerData +=   '<tr>';
+                    markerData +=       '<td class="marker-data-caption">'+LANGUAGE.ASSET_POSITION_MSG012+'</td>';
+                    markerData +=       '<td class="marker-data-value address-">Khreschatyk St, Kyiv, 02000</td>';
+                    markerData +=   '</tr>';
+                    markerData += '</table>';
                         
+
+
+
                 point                            
-                    .bindPopup(markerData,{maxWidth:self.data.MaxMapPopupWidth, closeButton: false})
+                    .bindPopup(markerData,{maxWidth:self.$app.data.MaxMapPopupWidth, closeButton: false})
                     .on('popupopen', function (e) {                               
-                        if (!POSINFOASSETLIST[key].posInfo.customAddress) {
+                        /*if (!POSINFOASSETLIST[key].posInfo.customAddress) {
                             Protocol.Helper.getAddressByGeocoder({lat: POSINFOASSETLIST[key].posInfo.lat, lng: POSINFOASSETLIST[key].posInfo.lng},function(address){                           
                                 POSINFOASSETLIST[key].posInfo.customAddress = address;                               
                                 markerData = self.methods.getMarkerDataTable(POSINFOASSETLIST[key]);                           
                                 e.target.setPopupContent(markerData);                                        
                                 e.popup.update();                                       
                             }); 
-                        }                                 
-                    });
-                if (app.device.desktop) {
-                    point.bindTooltip(POSINFOASSETLIST[key].Name,{permanent: false, direction: 'right'});
-                }
-                point._custom_asset_imei = key;
+                        }        */                         
+                    })
+                    .addTo(MapTrack);
+                
+                //point._custom_asset_imei = key;
 
-                point.addTo(AllMarkersGroup);
-                POSINFOASSETLIST[key].markerId = AllMarkersGroup.getLayerId(point); 
-*/
+                //point.addTo(AllMarkersGroup);
+                //POSINFOASSETLIST[key].markerId = AllMarkersGroup.getLayerId(point); 
+
 
                 //window.PosMarker[asset].addTo(MapTrack);
                                           
